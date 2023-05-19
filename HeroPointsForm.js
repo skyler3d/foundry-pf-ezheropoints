@@ -1,4 +1,4 @@
-import { addHeroPointToCharacter, findPlayerCharacters } from "./scripts/players.mjs"
+import { addHeroPointToCharacter, deductHeroPointFromPlayerCharacter, findPlayerCharacters } from "./scripts/players.mjs"
 
 export class HeroPointsForm extends FormApplication {
     static get defaultOptions() {
@@ -28,12 +28,13 @@ export class HeroPointsForm extends FormApplication {
         }
     }
 
-    async _handleButtonClick(event) {
-        this.playerNames.forEach(name => console.log(name))
-        //this.playerNames.map(async name => await addHeroPointToCharacter(name))
-        await Actor.updateDocuments(
-            game.actors.filter(actor => actor.type === "character")
-            .map(character => ({_id: character.id, 'system.resources.heroPoints.value': character.system.resources.heroPoints.value+1})))
+    async _handleAddHeroPointClick(event) {
+        await Promise.all(this.playerNames.map(async (name) => await addHeroPointToCharacter(name)))
+        this.render()
+    }
+
+    async _handleSubtractHeroPointClick(event) {
+        await Promise.all(this.playerNames.map(async (name) => await deductHeroPointFromPlayerCharacter(name)))
         this.render()
     }
 
@@ -41,6 +42,7 @@ export class HeroPointsForm extends FormApplication {
         super.activateListeners(html)
 
         html.on("change", "[data-action]", this._handleChange.bind(this))
-        html.on("click", "#add-points", this._handleButtonClick.bind(this))
+        html.on("click", "#add-points", this._handleAddHeroPointClick.bind(this))
+        html.on("click", "#subtract-points", this._handleSubtractHeroPointClick.bind(this))
     }
 }

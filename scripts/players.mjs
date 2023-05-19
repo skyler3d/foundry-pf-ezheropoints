@@ -8,15 +8,19 @@ export const findPlayerCharacterByName = (name) => findPlayerCharacters()
 export const addHeroPointToCharacter = async (name) => {
     const playerActor = findPlayerCharacterByName(name)
     const currentHeroPoints = playerActor.system.resources.heroPoints.value
-    const newHeroPoints = currentHeroPoints + 1
+    if (currentHeroPoints < 3) {
+        return await Actor.updateDocuments(
+            [{_id: playerActor.id, 'system.resources.heroPoints.value': currentHeroPoints+1}]
+        )
+    }
+}
 
-    return await playerActor.update({
-        system: {
-            resources: {
-                heroPoints: {
-                    value: newHeroPoints
-                }
-            }
-        }
-    })
+export const deductHeroPointFromPlayerCharacter = async (name) => {
+    const playerActor = findPlayerCharacterByName(name)
+    const currentHeroPoints = playerActor.system.resources.heroPoints.value
+    if (currentHeroPoints > 0) {
+        return await Actor.updateDocuments(
+            [{_id: playerActor.id, 'system.resources.heroPoints.value': currentHeroPoints-1}]
+        )
+    }
 }
