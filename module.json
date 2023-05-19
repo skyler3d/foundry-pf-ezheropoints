@@ -26,5 +26,8 @@
                 }
             }
         ]
-    }
+    },
+    "url": "https://github.com/slehan/foundry-pf-ezheropoints",
+    "manifest": "https://raw.githubusercontent.com/slehan/foundry-pf-ezheropoints/main/module.json",
+    "download": "https://github.com/slehan/foundry-pf-ezheropoints/archive/refs/heads/main.zip"
 }
