@@ -1,0 +1,30 @@
+{
+    "id": "pf2_ezheropoints",
+    "title": "EZ Hero Points",
+    "description": "A basic module that allows you to easily give out Hero Points for PF2",
+    "authors": [
+        {
+            "name": "Yak"
+        }
+    ],
+    "version": "1.0.0",
+    "esmodules": ["./index.js"],
+    "compatibility": {
+        "verified": 10
+    },
+    "styles": [
+        "styles/hero-points-form.css"
+    ],
+    "relationships": {
+        "requires": [
+            {
+                "id": "_chatcommands",
+                "type": "module",
+                "manifest": "https://gitlab.com/woodentavern/foundryvtt-chat-command-lib/-/raw/master/src/module.json",
+                "compatibility": {
+                    "verified": "2.0.1"
+                }
+            }
+        ]
+    }
+}
