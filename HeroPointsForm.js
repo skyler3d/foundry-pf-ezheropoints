@@ -24,17 +24,17 @@ export class HeroPointsForm extends FormApplication {
 
     async _handleChange(e) {
         if (e.currentTarget.id === "playerList") {
-            this.playerNames = Array.from(e.currentTarget.selectedOptions).map(opt => opt.value)
+            this.playerIds = Array.from(e.currentTarget.selectedOptions).map(opt => opt.value)
         }
     }
 
     async _handleAddHeroPointClick(event) {
-        await Promise.all(this.playerNames.map(async (name) => await addHeroPointToCharacter(name)))
+        await Promise.all(this.playerIds.map(async (id) => await addHeroPointToCharacter(id)))
         this.render()
     }
 
     async _handleSubtractHeroPointClick(event) {
-        await Promise.all(this.playerNames.map(async (name) => await deductHeroPointFromPlayerCharacter(name)))
+        await Promise.all(this.playerIds.map(async (id) => await deductHeroPointFromPlayerCharacter(id)))
         this.render()
     }
 

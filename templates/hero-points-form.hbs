@@ -3,7 +3,7 @@
         <p>Select one or many players to give a Hero point to:</p>
         <select name="players" id="playerList" data-action="select-players" multiple>
             {{#each players}}
-            <option class="flexrow" value={{name}}>{{name}} ({{system.resources.heroPoints.value}} Hero Point(s))</option>
+            <option class="flexrow" value={{id}}>{{name}} ({{system.resources.heroPoints.value}} Hero Point(s))</option>
             {{/each}}
         </select>
 
